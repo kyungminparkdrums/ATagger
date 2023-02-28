@@ -1,0 +1,11 @@
+universe = vanilla
+Executable = parquet.sh
+request_cpus = 4
+should_transfer_files = YES
+Input = utils.py
+transfer_input_files = convert_AA.py
+when_to_transfer_output = ON_EXIT
+Output = parquet_$(Cluster)_$(Process).stdout
+Error = parquet_$(Cluster)_$(Process).stderr
+Log = parquet_$(Cluster)_$(Process).log
+Queue 1

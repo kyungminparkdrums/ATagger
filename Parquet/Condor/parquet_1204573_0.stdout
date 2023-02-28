@@ -1,0 +1,95 @@
+[FERMIHTC-SINGULARITY]: INFO -- No Singulariy image specified
+[FERMIHTC-SINGULARITY]: INFO -- Running job on the host machine
+
+[FERMIHTC-SINGULARITY]: INFO -- Running ./condor_exec.exe
+_condor_stderr
+_condor_stdout
+condor_exec.exe
+convert_AA.py
+docker_stderror
+tmp
+utils.py
+var
+x509up_u58447
+(' >> Input file:', ['test_Feb26_2023_AA_0p1GeV'])
+('PATH: ', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000')
+('outlist: ', ['/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_1-1.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_1-2.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_1-3.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_1.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_11.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_12.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_13.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_14.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_15.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_16.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_17.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_18.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_2.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_4.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_5.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_6.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_7.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_8.root', '/store/user/kypark/Updated_ATagger_AA_HLT_Ng2_0p1GeV_Feb26_2023/Feb26_2023/HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8/test_Feb26_2023_AA_0p1GeV/230227_002751/0000/output_9.root'])
+(' >> nEvts:', 205217L)
+(' >> Processing entries: [', 0, '->', 205217L, ')')
+(' >> Output file:', './/test_Feb26_2023_AA_0p1GeV.HToAA_MA-0p1GeV.parquet.0')
+('>> Dataset: ', 'HAHMHToAA_AToGG_MA-0p1GeV_TuneCP5_PSweights_13TeV-madgraph_pythia8')
+(' .. Processing entry', 0, 'nPhos:', 0, 'time:', 17.63453483581543)
+(' .. Processing entry', 100, 'nPhos:', 155, 'time:', 141.1380000114441)
+(' >> nPhos =', 302, 'total wgts =', 302.0, 'skipped:', 0)
+(' >> Real time:', 2.108371949195862, 'minutes')
+(' >> CPU time: ', 0.15483333333333332, 'minutes')
+ >> ======================================
+(' >> Photons:', 302, 'Fakes:', 0, 'Sum of weights:', 302.0)
+(' >> Real time:', 2.108371949195862, 'minutes')
+(' >> CPU time: ', 0.15483333333333332, 'minutes')
+ >> ======================================
+<pyarrow._parquet.FileMetaData object at 0x7f85bc3d19f0>
+  created_by: parquet-cpp version 1.5.1-SNAPSHOT
+  num_columns: 33
+  num_rows: 302
+  num_row_groups: 302
+  format_version: 1.0
+  serialized_size: 1081036
+<pyarrow._parquet.ParquetSchema object at 0x7f85fec6d450>
+pho_id.list.item: DOUBLE
+dataset: BYTE_ARRAY
+puReco.list.item: INT64
+puTrue.list.item: DOUBLE
+PFTgraph_nodes_r04.list.item.list.item.list.item: DOUBLE
+X_PFT_pT.list.item.list.item.list.item: DOUBLE
+X_PFT_QpT.list.item.list.item.list.item: DOUBLE
+pt: DOUBLE
+pu.list.item: INT64
+bdt.list.item: DOUBLE
+A_genId: DOUBLE
+X_PFT_d0.list.item.list.item.list.item: DOUBLE
+A.list.item: DOUBLE
+phi: DOUBLE
+E: DOUBLE
+X_PFT_pT_PV.list.item.list.item.list.item: DOUBLE
+PFTgraph_nodes_img.list.item.list.item.list.item: DOUBLE
+pho_vars.list.item: DOUBLE
+RHgraph_nodes_img.list.item.list.item.list.item: DOUBLE
+ancestry.list.item: DOUBLE
+X_RH_energyT.list.item.list.item.list.item: DOUBLE
+genId.list.item: DOUBLE
+wgt: DOUBLE
+X_RH_energyZ.list.item.list.item.list.item: DOUBLE
+X_RH_energy.list.item.list.item.list.item: DOUBLE
+RHgraph_nodes_r04.list.item.list.item.list.item: DOUBLE
+idx.list.item: INT64
+X_PFT_pT_nPV.list.item.list.item.list.item: DOUBLE
+X_PFT_z0.list.item.list.item.list.item: DOUBLE
+tpu.list.item: DOUBLE
+eta: DOUBLE
+y.list.item: INT64
+puIdx.list.item: INT64
+ 
+_condor_stderr
+_condor_stdout
+condor_exec.exe
+convert_AA.py
+docker_stderror
+test_Feb26_2023_AA_0p1GeV.HToAA_MA-0p1GeV.parquet.0
+tmp
+tmp.txt
+utils.py
+utils.pyc
+var
+x509up_u58447
+_condor_stderr
+_condor_stdout
+condor_exec.exe
+convert_AA.py
+docker_stderror
+tmp
+tmp.txt
+utils.py
+utils.pyc
+var
+x509up_u58447
