@@ -146,7 +146,7 @@ class RecHitAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
     edm::EDGetTokenT<std::vector<PileupSummaryInfo> > puCollection_;
     
     //static const int nPhotons = 2;
-    static const int nPhotons = 1;
+    //static const int nPhotons = 1;
 
     TProfile2D *hEB_energy;
     TProfile2D *hEB_time;
@@ -205,9 +205,11 @@ class RecHitAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
     void fillPFTracks ( const edm::Event&, const edm::EventSetup& );
 
     std::map<unsigned int, std::vector<unsigned int>> mGenPi0_RecoPho;
-    std::vector<int> vTrigPhoIdxs_;
-    std::vector<int> vPreselPhoIdxs_;
-    std::vector<int> vRegressPhoIdxs_;
+
+    std::vector<unsigned int> vRecoPhoIdxs_;
+    std::vector<unsigned int> vTrigPhoIdxs_;
+    std::vector<unsigned int> vPreselPhoIdxs_;
+    std::vector<unsigned int> vRegressPhoIdxs_;
     std::vector<float> vIphi_Emax_;
     std::vector<float> vIeta_Emax_;
     std::vector<GlobalPoint> vPos_Emax_;
@@ -294,7 +296,7 @@ class RecHitAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
     TH1F * hNpassed_nRecoPho;
     TH1F * hNpassed_hlt;
     TH1F * hNpassed_img;
-    TH1F * hNRecoPho_noCut;
+    TH1F * hNRecoPho_reco;
     TH1F * hNRecoPho_HLT;
     TH1F * hNRecoPho_presel;
     TH1F * hNRecoPho_hits;

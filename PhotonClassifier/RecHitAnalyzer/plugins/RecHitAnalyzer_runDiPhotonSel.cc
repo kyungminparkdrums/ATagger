@@ -13,7 +13,7 @@ void RecHitAnalyzer::branchesDiPhotonSel ( TTree* tree, edm::Service<TFileServic
   tree->Branch("FC_inputs", &vFC_inputs_);
   tree->Branch("hltAccept", &hltAccept_);
   //tree->Branch("nPreselPho",  &nPreselPho_);
-  tree->Branch("nRecoPho",  &nRecoPho_);
+  //tree->Branch("nRecoPho",  &nRecoPho_);
   tree->Branch("minDR",     &vMinDR_);
 
   hNpassed_kin      = fs->make<TH1F>("hNpassed_kin", "isPassed;isPassed;N", 2, 0., 2);
@@ -31,7 +31,20 @@ bool RecHitAnalyzer::runDiPhotonSel ( const edm::Event& iEvent, const edm::Event
 
   ////////// Apply selection //////////
 
-  hNpassed_hlt->Fill(0.);  // KYUNGMIN
+  // Require reco photon to be in barrel, and > 10 GeV pT
+  vRecoPhoIdxs_.clear();
+
+  for ( unsigned int iP = 0; iP < photons->size(); iP++ ) {
+    PhotonRef iPho( photons, iP );
+    if ( std::abs(iPho->pt()) < 10. ) continue;
+    if ( std::abs(iPho->eta()) > 1.442 ) continue;
+    vRecoPhoIdxs_.push_back( iP );
+  }
+
+  std::cout << " vRecoPhoIdxs_ size: " << vRecoPhoIdxs_.size() << std::endl;
+
+  // Apply Trigger
+  hNpassed_hlt->Fill(0.);
 
   // Check HLT trigger decision
   edm::Handle<edm::TriggerResults> trgs;
@@ -60,50 +73,47 @@ bool RecHitAnalyzer::runDiPhotonSel ( const edm::Event& iEvent, const edm::Event
   }
   hltAccept_ = hltAccept;
 
-  // ADDED BY KYUNGMIN
   vTrigPhoIdxs_.clear();
   vPreselPhoIdxs_.clear();
-
-  std::vector<pho_obj> vPhosNoCut;
-  vPhoNoCutIdxs_.clear();
-  vPhosNoCut.clear();
 
   std::vector<pho_obj> vPhos;
   vPhos.clear();
 
-  for ( unsigned int iP = 0; iP < photons->size(); iP++ ) {
+  if ( hltAccept == 0 ) return false;
+  hNpassed_hlt->Fill(1.);
+
+  for ( unsigned int iP : vRecoPhoIdxs_ ) {
     PhotonRef iPho( photons, iP );
+    
     vTrigPhoIdxs_.push_back( iP );
-
-    vPhoNoCutIdxs_.push_back( iP );
-
-    pho_obj Pho_obj = { iP, std::abs(iPho->pt()) };
-    vPhosNoCut.push_back( Pho_obj );
-
-    vPhos.push_back( Pho_obj );
-    vPreselPhoIdxs_.push_back( iP );
   }
   std::cout << " vTrigPhoIdxs_ size: " << vTrigPhoIdxs_.size() << std::endl;
 
-  //std::sort( vPhosNoCut.begin(), vPhosNoCut.end(), [](auto const &a, auto const &b) { return a.pt > b.pt; } );
+  hNpassed_presel->Fill(0.);
 
-  //leadingPt = vPhosNoCut[0].pt;
-  //subleadingPt = vPhosNoCut[1].pt;
+  if ( vTrigPhoIdxs_.size() != 2 ) return false;  // require two barrel reco photons that pass the trigger
+  hNpassed_presel->Fill(1.);
 
-  if ( hltAccept == 0 ) return false;  // KYUNGMIN
-  //nRecoPho_ = vPreselPhoIdxs_.size(); // KYUNGMIN
-  hNpassed_hlt->Fill(1.);  // KYUNGMIN
+  for ( unsigned int iP : vTrigPhoIdxs_ ) {
+    PhotonRef iPho( photons, iP );
+    
+    pho_obj Pho_obj = { iP, std::abs(iPho->pt()) };
+    vPhos.push_back( Pho_obj );
+    vPreselPhoIdxs_.push_back( iP );
+  }
 
   if ( debug ) std::cout << " Presel pho size:" << vPhos.size() << std::endl;
-  if ( vPhos.size() != 2 ) return false;
-  hNpassed_presel->Fill(1.);
+  //if ( vPhos.size() != 2 ) return false;  // require two barrel reco photons that pass the trigger
 
   std::sort( vPhos.begin(), vPhos.end(), [](auto const &a, auto const &b) { return a.pt > b.pt; } );
 
   leadingPt = vPhos[0].pt;
   subleadingPt = vPhos[1].pt;
 
-  nRecoPho_ = vPreselPhoIdxs_.size(); // KYUNGMIN
+  hLeadingPhoPt->Fill(leadingPt);
+  hSubleadingPhoPt->Fill(subleadingPt);
+
+  //nRecoPho_ = vPreselPhoIdxs_.size();
 
   return true;
 }

@@ -65,7 +65,7 @@ RecHitAnalyzer::RecHitAnalyzer(const edm::ParameterSet& iConfig)
   branchesPFTracks    ( RHTree, fs );
 
   hNpassed_img = fs->make<TH1F>("hNpassed_img", "isPassed;isPassed;N", 2, 0., 2);
-  hNRecoPho_noCut = fs->make<TH1F>("hNRecoPho_noCut", "NRecoPho_noCut;NRecoPho_noCut;N", 10, 0., 10);
+  hNRecoPho_reco = fs->make<TH1F>("hNRecoPho_reco", "NRecoPho_reco;NRecoPho_reco;N", 10, 0., 10);  // after pT > 10GeV, eta < 1.442 cuts
   hNRecoPho_HLT = fs->make<TH1F>("hNRecoPho_HLT", "NRecoPho_HLT;NRecoPho_HLT;N", 10, 0., 10);
   hNRecoPho_presel = fs->make<TH1F>("hNRecoPho_presel", "NRecoPho_presel;NRecoPho_presel;N", 10, 0., 10);
   hNRecoPho_hits = fs->make<TH1F>("hNRecoPho_hits", "NRecoPho_hits;NRecoPho_hits;N", 10, 0., 10);
@@ -112,34 +112,31 @@ RecHitAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   iSetup.get<CaloGeometryRecord>().get(caloGeomH);
   const CaloGeometry* caloGeom = caloGeomH.product();
 
-  // Run explicit jet selection
+  // Run selections
   bool hasPassed;
-  vPreselPhoIdxs_.clear();
-  nTotal += nPhotons;
- 
-  std::cout << ">> nPhotons: " << nPhotons << std::endl;  // added by KYUNGMIN
-  std::cout << ">> nTotal: " << nTotal << std::endl;      // added by KYUNGMIN
+
+  nTotal += 1;
  
   hasPassed = runDiPhotonSel_Iso ( iEvent, iSetup ); // trigger + isolation preselections + N(reco pho) == 2
   //hasPassed = runDiPhotonSel ( iEvent, iSetup ); // trigger + N(reco pho) == 2
+
   std::cout << ">> vPreselPhoIdxs_.size(): " << vPreselPhoIdxs_.size() << std::endl;
-  std::cout << ">> hasPassed: " << hasPassed << std::endl;      // added by KYUNGMIN
+  std::cout << ">> hasPassed: " << hasPassed << std::endl;
 
-  hNRecoPho_noCut->Fill(vPhoNoCutIdxs_.size());
-  hLeadingPhoPt->Fill(leadingPt);
-  hSubleadingPhoPt->Fill(subleadingPt);
-
-  if ( !hasPassed ) return;
- 
+  hNRecoPho_reco->Fill(vRecoPhoIdxs_.size());
   hNRecoPho_HLT->Fill(vTrigPhoIdxs_.size());
   hNRecoPho_presel->Fill(vPreselPhoIdxs_.size());
+  hLeadingPhoPt->Fill(leadingPt);
+  hSubleadingPhoPt->Fill(subleadingPt);
 
   nTrigPassed += vTrigPhoIdxs_.size();
   std::cout << ">> nTrigPassed: " << nTrigPassed << std::endl;
   nPreselPassed += vPreselPhoIdxs_.size();
   std::cout << ">> nPreselPassed: " << nPreselPassed << std::endl;
-  
-  // Get coordinates of photon supercluster seed
+ 
+  if ( !hasPassed ) return;
+ 
+    // Get coordinates of photon supercluster seed
   // and check if in workable location in EB
   hNpassed_img->Fill(0.);
   nPho = 0;
@@ -200,8 +197,8 @@ RecHitAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 
       // KYUNGMIN
-      std::cout << "iRHit->energy: " << iRHit->energy() << ", Emax: " << Emax << std::endl;
-      std::cout << "ieta: " << ieta_ << ", iphi: " << iphi_ << std::endl;
+      //std::cout << "iRHit->energy: " << iRHit->energy() << ", Emax: " << Emax << std::endl;
+      //std::cout << "ieta: " << ieta_ << ", iphi: " << iphi_ << std::endl;
 
       // Keep coordinates of shower max
       if ( iRHit->energy() > Emax ) {
@@ -235,7 +232,7 @@ RecHitAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     nPho++;
 
     //KYUNGMIN
-    std::cout << "nPho: " << nPho << std::endl;
+    //std::cout << "nPho: " << nPho << std::endl;
 
   } // Photons
  
@@ -250,14 +247,15 @@ RecHitAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   //nPassed += nPho;   // commented out by KYUNGMIN
   hNRecoPho_hits->Fill(nPho);
 
-  //runPhoObjSel_AA ( iEvent, iSetup );
-  runPhoObjSel_fake ( iEvent, iSetup );
+  runPhoObjSel_AA ( iEvent, iSetup );
+  //runPhoObjSel_fake ( iEvent, iSetup );
   //runPhoObjSel_prompt ( iEvent, iSetup );
-  nPhoObjPassed += vPhoObj_recoIdx_.size();
+  //nPhoObjPassed += vPhoObj_recoIdx_.size();
+  nPhoObjPassed = vPhoObj_recoIdx_.size();
 
-  std::cout << "vPhoObj_recoIdx_ Size: " << vPhoObj_recoIdx_.size() << std::endl;
-  std::cout << "vRegressPhoIdxs_ Size: " << vRegressPhoIdxs_.size() << std::endl;
-  
+  std::cout << "RECO: vRegressPhoIdxs_ Size: " << vRegressPhoIdxs_.size() << std::endl;
+  std::cout << "GEN-MATCHED: vPhoObj_recoIdx_ Size: " << vPhoObj_recoIdx_.size() << std::endl;
+  std::cout << "nPho: " << nPho << std::endl;
 
   if ( debug ) std::cout << "PhoObj Size: " << vPhoObj_recoIdx_.size() << std::endl;
   if ( vPhoObj_recoIdx_.size() == 0 ) return;
@@ -272,13 +270,8 @@ RecHitAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
   fillRecHits       ( iEvent, iSetup );
   fillPFTracks      ( iEvent, iSetup );
  
-  nPassed += nPho;   // commented out by KYUNGMIN
-  //nPassed += nPhoObjPassed;   // commented out by KYUNGMIN
-
-  // KYUNGMIN
-//  if ( vPreselPhoIdxs_.size() == 0 ) return;
-//  hNpassed_img->Fill(0.);
-//  nPassed = nPreselPassed;  // KYUNGMIN
+  //nPassed += nPho;   // commented out by KYUNGMIN
+  nPassed += nPhoObjPassed;
 
   RHTree->Fill();
   hNpassed_img->Fill(1.);
@@ -311,7 +304,7 @@ void
 RecHitAnalyzer::endJob()
 {
   std::cout << ">> After Trigger: " << nTrigPassed << std::endl;
-  std::cout << ">> After Egamma Iso Cuts: " << nPreselPassed << "/" << nTotal << std::endl;
+  std::cout << ">> After Pre-selection (barrel and/or iso cuts): " << nPreselPassed << "/" << nTotal << std::endl;
   std::cout << ">> Gen-matching etc: " << nPassed << "/" << nTotal << std::endl;
 }
 
